@@ -8,457 +8,347 @@
     content="width=device-width, initial-scale=1.0"
   />
 
-  <title>X Content Generator</title>
+  <meta
+    name="description"
+    content="Analyze and improve X posts in Tamil and English."
+  />
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+  <title>X Content Studio</title>
 
-    body {
-      min-height: 100vh;
-      padding: 24px 16px;
-      font-family: Arial, sans-serif;
-      color: #ffffff;
-      background:
-        radial-gradient(circle at top, #1d3557, #05070b 55%);
-    }
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-    .container {
-      width: 100%;
-      max-width: 720px;
-      margin: 0 auto;
-    }
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
 
-    .logo {
-      width: 58px;
-      height: 58px;
-      margin: 0 auto 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 18px;
-      background: #ffffff;
-      color: #000000;
-      font-size: 30px;
-      font-weight: bold;
-      box-shadow: 0 10px 30px rgba(255, 255, 255, 0.12);
-    }
-
-    h1 {
-      margin-bottom: 10px;
-      text-align: center;
-      font-size: 32px;
-    }
-
-    .subtitle {
-      margin-bottom: 28px;
-      text-align: center;
-      color: #aeb8c8;
-      line-height: 1.6;
-    }
-
-    .card {
-      padding: 22px;
-      border: 1px solid #273143;
-      border-radius: 22px;
-      background: rgba(13, 18, 28, 0.93);
-      box-shadow: 0 18px 55px rgba(0, 0, 0, 0.35);
-    }
-
-    label {
-      display: block;
-      margin-bottom: 9px;
-      font-size: 14px;
-      font-weight: bold;
-      color: #dbe5f5;
-    }
-
-    input,
-    select,
-    textarea {
-      width: 100%;
-      padding: 14px;
-      border: 1px solid #334057;
-      border-radius: 13px;
-      outline: none;
-      color: #ffffff;
-      background: #111827;
-      font-size: 16px;
-    }
-
-    input:focus,
-    select:focus,
-    textarea:focus {
-      border-color: #1d9bf0;
-      box-shadow: 0 0 0 3px rgba(29, 155, 240, 0.15);
-    }
-
-    textarea {
-      min-height: 260px;
-      resize: vertical;
-      line-height: 1.6;
-    }
-
-    .field {
-      margin-bottom: 18px;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-    }
-
-    button {
-      width: 100%;
-      padding: 14px;
-      border: none;
-      border-radius: 13px;
-      cursor: pointer;
-      font-size: 16px;
-      font-weight: bold;
-      transition: 0.2s;
-    }
-
-    button:active {
-      transform: scale(0.98);
-    }
-
-    .generate-button {
-      margin-top: 4px;
-      color: #ffffff;
-      background: #1d9bf0;
-    }
-
-    .generate-button:hover {
-      background: #1688d4;
-    }
-
-    .result-section {
-      display: none;
-      margin-top: 22px;
-    }
-
-    .result-section.show {
-      display: block;
-    }
-
-    .button-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-top: 14px;
-    }
-
-    .copy-button {
-      color: #ffffff;
-      background: #263244;
-    }
-
-    .chatgpt-button {
-      color: #000000;
-      background: #ffffff;
-    }
-
-    .status {
-      min-height: 22px;
-      margin-top: 13px;
-      text-align: center;
-      color: #72e6a4;
-      font-size: 14px;
-    }
-
-    .help {
-      margin-top: 22px;
-      padding: 16px;
-      border-radius: 15px;
-      color: #aeb8c8;
-      background: #0d121c;
-      font-size: 14px;
-      line-height: 1.7;
-    }
-
-    footer {
-      margin-top: 24px;
-      text-align: center;
-      color: #778195;
-      font-size: 13px;
-    }
-
-    @media (max-width: 560px) {
-      h1 {
-        font-size: 27px;
-      }
-
-      .grid,
-      .button-row {
-        grid-template-columns: 1fr;
-      }
-
-      .card {
-        padding: 18px;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
-  <main class="container">
+  <header class="topbar">
+    <div class="container topbar-content">
+      <a href="#" class="brand">
+        <span class="brand-icon">X</span>
 
-    <div class="logo">𝕏</div>
-
-    <h1>X Content Generator</h1>
-
-    <p class="subtitle">
-      Paste an X trending topic and create a powerful prompt
-      for posts, hooks, hashtags and content ideas.
-    </p>
-
-    <section class="card">
-
-      <div class="field">
-        <label for="trend">X trending topic</label>
-
-        <input
-          type="text"
-          id="trend"
-          placeholder="Example: Artificial Intelligence"
-        />
-      </div>
-
-      <div class="grid">
-
-        <div class="field">
-          <label for="language">Content language</label>
-
-          <select id="language">
-            <option value="Tamil">Tamil</option>
-            <option value="English">English</option>
-            <option value="Tamil and English">Tamil + English</option>
-          </select>
-        </div>
-
-        <div class="field">
-          <label for="tone">Content style</label>
-
-          <select id="tone">
-            <option value="viral and engaging">Viral</option>
-            <option value="professional and informative">
-              Professional
-            </option>
-            <option value="funny and entertaining">Funny</option>
-            <option value="motivational and inspiring">
-              Motivational
-            </option>
-            <option value="controversial but respectful">
-              Debate style
-            </option>
-          </select>
-        </div>
-
-      </div>
-
-      <div class="field">
-        <label for="audience">Target audience</label>
-
-        <input
-          type="text"
-          id="audience"
-          placeholder="Example: Tamil social media users"
-        />
-      </div>
+        <span>
+          <strong>X Content Studio</strong>
+          <small>Post Analyzer & Generator</small>
+        </span>
+      </a>
 
       <button
-        class="generate-button"
-        onclick="generatePrompt()"
+        id="themeToggle"
+        class="icon-button"
+        type="button"
+        aria-label="Toggle theme"
       >
-        Generate Content Prompt
+        ☾
       </button>
+    </div>
+  </header>
 
-      <div class="result-section" id="resultSection">
+  <main class="container main-content">
+    <section class="hero-section">
+      <span class="badge">AI-ready content toolkit</span>
 
-        <div class="field" style="margin-top: 22px;">
-          <label for="result">Generated prompt</label>
+      <h1>
+        Create better posts for
+        <span>X</span>
+      </h1>
 
-          <textarea
-            id="result"
-            readonly
-          ></textarea>
-        </div>
-
-        <div class="button-row">
-
-          <button
-            class="copy-button"
-            onclick="copyPrompt()"
-          >
-            Copy Prompt
-          </button>
-
-          <button
-            class="chatgpt-button"
-            onclick="openChatGPT()"
-          >
-            Open ChatGPT
-          </button>
-
-        </div>
-
-        <div class="status" id="status"></div>
-
-      </div>
-
-      <div class="help">
-        <strong>How to use:</strong><br />
-        1. Enter an X trending topic.<br />
-        2. Select the language and style.<br />
-        3. Press “Generate Content Prompt”.<br />
-        4. Copy the prompt and paste it into ChatGPT.
-      </div>
-
+      <p>
+        உங்கள் X post அல்லது trending topic-ஐ analyse செய்து,
+        hook, clarity, replies மற்றும் share potential-ஐ மேம்படுத்துங்கள்.
+      </p>
     </section>
 
-    <footer>
-      Free X Content Generator
-    </footer>
+    <section class="workspace-grid">
+      <article class="card input-card">
+        <div class="card-heading">
+          <div>
+            <p class="section-label">POST INPUT</p>
+            <h2>உங்கள் content-ஐ உள்ளிடுங்கள்</h2>
+          </div>
 
+          <span id="characterCount" class="character-count">
+            0 / 280
+          </span>
+        </div>
+
+        <label for="languageSelect">Output language</label>
+
+        <select id="languageSelect">
+          <option value="tamil-english">
+            Tamil + English
+          </option>
+
+          <option value="tamil">
+            Tamil
+          </option>
+
+          <option value="english">
+            English
+          </option>
+        </select>
+
+        <label for="postInput">
+          X post அல்லது trending topic
+        </label>
+
+        <textarea
+          id="postInput"
+          maxlength="280"
+          placeholder="உதாரணம்: இந்த புதிய AI update creators-க்கு உண்மையில் பயனுள்ளதாக இருக்குமா?"
+        ></textarea>
+
+        <div class="quick-topics">
+          <p>Quick examples</p>
+
+          <div class="chip-list">
+            <button
+              type="button"
+              class="topic-chip"
+              data-topic="இந்த புதிய AI update creators-க்கு உண்மையில் பயனுள்ளதாக இருக்குமா? உங்கள் கருத்து என்ன?"
+            >
+              AI Update
+            </button>
+
+            <button
+              type="button"
+              class="topic-chip"
+              data-topic="🔥 இன்று X-ல் அதிகம் பேசப்படும் இந்த topic ஏன் இவ்வளவு வேகமாக viral ஆகிறது?"
+            >
+              Trending Topic
+            </button>
+
+            <button
+              type="button"
+              class="topic-chip"
+              data-topic="Unpopular opinion: எல்லா viral content-மும் valuable content அல்ல. Agree or disagree?"
+            >
+              Opinion Post
+            </button>
+          </div>
+        </div>
+
+        <div id="inputError" class="error-message" hidden></div>
+
+        <button id="analyzeButton" class="primary-button" type="button">
+          <span>Analyze Post</span>
+          <span aria-hidden="true">→</span>
+        </button>
+      </article>
+
+      <aside class="card tips-card">
+        <p class="section-label">CONTENT CHECKLIST</p>
+
+        <h2>ஒரு நல்ல X post</h2>
+
+        <ul class="checklist">
+          <li>
+            <span>01</span>
+
+            <div>
+              <strong>Strong hook</strong>
+              <p>முதல் வரி scroll-ஐ நிறுத்த வேண்டும்.</p>
+            </div>
+          </li>
+
+          <li>
+            <span>02</span>
+
+            <div>
+              <strong>Clear value</strong>
+              <p>ஒரே post-ல் ஒரு முக்கிய message வைத்திருங்கள்.</p>
+            </div>
+          </li>
+
+          <li>
+            <span>03</span>
+
+            <div>
+              <strong>Natural question</strong>
+              <p>மக்கள் பதிலளிக்கக்கூடிய கேள்வி சேர்க்கவும்.</p>
+            </div>
+          </li>
+
+          <li>
+            <span>04</span>
+
+            <div>
+              <strong>Shareable insight</strong>
+              <p>Fact, tip, comparison அல்லது useful takeaway சேர்க்கவும்.</p>
+            </div>
+          </li>
+        </ul>
+      </aside>
+    </section>
+
+    <section id="resultsSection" class="results-section" hidden>
+      <div class="section-header">
+        <div>
+          <p class="section-label">ANALYSIS RESULT</p>
+          <h2>Post performance estimate</h2>
+        </div>
+
+        <button
+          id="resetButton"
+          class="secondary-button"
+          type="button"
+        >
+          New analysis
+        </button>
+      </div>
+
+      <div class="result-grid">
+        <article class="card overall-card">
+          <p class="section-label">OVERALL SCORE</p>
+
+          <div class="score-circle">
+            <strong id="overallScore">0</strong>
+            <span>/100</span>
+          </div>
+
+          <h3 id="scoreRating">Waiting for analysis</h3>
+
+          <p id="scoreSummary">
+            உங்கள் post-ஐ analyse செய்த பிறகு result இங்கே வரும்.
+          </p>
+        </article>
+
+        <article class="card metric-card">
+          <div class="metric-heading">
+            <span>Hook</span>
+            <strong id="hookScore">0</strong>
+          </div>
+
+          <div class="progress-track">
+            <div id="hookBar" class="progress-bar"></div>
+          </div>
+
+          <div class="metric-heading">
+            <span>Clarity</span>
+            <strong id="clarityScore">0</strong>
+          </div>
+
+          <div class="progress-track">
+            <div id="clarityBar" class="progress-bar"></div>
+          </div>
+
+          <div class="metric-heading">
+            <span>Reply potential</span>
+            <strong id="replyScore">0</strong>
+          </div>
+
+          <div class="progress-track">
+            <div id="replyBar" class="progress-bar"></div>
+          </div>
+
+          <div class="metric-heading">
+            <span>Share potential</span>
+            <strong id="shareScore">0</strong>
+          </div>
+
+          <div class="progress-track">
+            <div id="shareBar" class="progress-bar"></div>
+          </div>
+
+          <div class="metric-heading">
+            <span>Readability</span>
+            <strong id="readabilityScore">0</strong>
+          </div>
+
+          <div class="progress-track">
+            <div id="readabilityBar" class="progress-bar"></div>
+          </div>
+        </article>
+      </div>
+
+      <div class="result-grid secondary-results">
+        <article class="card format-card">
+          <p class="section-label">RECOMMENDED FORMAT</p>
+
+          <h3 id="formatName">Text post</h3>
+
+          <p id="formatReason">
+            Analysis result கிடைத்த பிறகு format recommendation வரும்.
+          </p>
+        </article>
+
+        <article class="card metadata-card">
+          <p class="section-label">POST DETAILS</p>
+
+          <div class="metadata-list">
+            <div>
+              <span>Characters</span>
+              <strong id="metaCharacters">0</strong>
+            </div>
+
+            <div>
+              <span>Words</span>
+              <strong id="metaWords">0</strong>
+            </div>
+
+            <div>
+              <span>Questions</span>
+              <strong id="metaQuestions">0</strong>
+            </div>
+
+            <div>
+              <span>Hashtags</span>
+              <strong id="metaHashtags">0</strong>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <article class="card suggestions-card">
+        <div class="card-heading">
+          <div>
+            <p class="section-label">IMPROVEMENTS</p>
+            <h2>Suggestions</h2>
+          </div>
+        </div>
+
+        <div id="suggestionsList" class="suggestions-list"></div>
+      </article>
+
+      <article class="card improved-post-card">
+        <div class="card-heading">
+          <div>
+            <p class="section-label">IMPROVED VERSION</p>
+            <h2>Suggested post</h2>
+          </div>
+
+          <button
+            id="copyButton"
+            class="secondary-button"
+            type="button"
+          >
+            Copy
+          </button>
+        </div>
+
+        <p id="improvedPost">
+          Improved post இங்கே வரும்.
+        </p>
+      </article>
+    </section>
   </main>
 
-  <script>
-    function generatePrompt() {
-      const trend = document
-        .getElementById("trend")
-        .value
-        .trim();
+  <footer class="footer">
+    <div class="container">
+      <p>
+        X Content Studio — estimated content analysis only.
+        இது official X ranking score அல்ல.
+      </p>
+    </div>
+  </footer>
 
-      const language = document
-        .getElementById("language")
-        .value;
+  <div id="toast" class="toast" role="status"></div>
 
-      const tone = document
-        .getElementById("tone")
-        .value;
-
-      const audience =
-        document.getElementById("audience").value.trim()
-        || "general X users";
-
-      const resultSection =
-        document.getElementById("resultSection");
-
-      const result =
-        document.getElementById("result");
-
-      const status =
-        document.getElementById("status");
-
-      if (!trend) {
-        alert("Please enter an X trending topic.");
-        return;
-      }
-
-      const prompt = `
-You are an expert social media content creator.
-
-Create content based on this X trending topic:
-
-TOPIC:
-${trend}
-
-LANGUAGE:
-${language}
-
-TARGET AUDIENCE:
-${audience}
-
-STYLE:
-${tone}
-
-Generate the following:
-
-1. Explain why this topic is trending in simple words.
-
-2. Create 10 engaging X posts.
-   - Each post must be concise.
-   - Use a strong opening hook.
-   - Make the content natural and shareable.
-   - Do not spread unverified information.
-
-3. Create 10 short viral hooks.
-
-4. Create 5 audience-engagement questions.
-
-5. Create 10 relevant hashtags.
-
-6. Create 5 image or video content ideas.
-
-7. Create one X thread with 7 posts.
-   - Number each post.
-   - Make the first post highly attention-grabbing.
-   - End with a call to action.
-
-8. Suggest the best type of post for this topic:
-   - Educational
-   - News
-   - Opinion
-   - Humour
-   - Motivational
-
-Format everything clearly with headings.
-      `.trim();
-
-      result.value = prompt;
-      resultSection.classList.add("show");
-      status.textContent = "Prompt generated successfully!";
-
-      resultSection.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-      });
-    }
-
-    async function copyPrompt() {
-      const result =
-        document.getElementById("result");
-
-      const status =
-        document.getElementById("status");
-
-      if (!result.value) {
-        alert("Generate a prompt first.");
-        return;
-      }
-
-      try {
-        await navigator.clipboard.writeText(result.value);
-        status.textContent = "Prompt copied successfully!";
-      } catch (error) {
-        result.select();
-        document.execCommand("copy");
-        status.textContent = "Prompt copied successfully!";
-      }
-    }
-
-    function openChatGPT() {
-      const result =
-        document.getElementById("result");
-
-      if (!result.value) {
-        alert("Generate a prompt first.");
-        return;
-      }
-
-      copyPrompt();
-
-      window.open(
-        "https://chatgpt.com/",
-        "_blank"
-      );
-    }
-  </script>
-
+  <script src="script.js"></script>
 </body>
 </html>
