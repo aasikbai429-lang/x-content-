@@ -13,7 +13,17 @@
 
 <br><br>
 
-<button>Generate Prompt</button>
+<button onclick="generatePrompt()">Generate Prompt</button>
+<script>
+function generatePrompt() {
+  const trend = document.getElementById("trend").value;
 
+  alert(
+    "Trend: " + trend +
+    "\n\nCopy this into ChatGPT:\n\n" +
+    "Create 10 YouTube titles, a Shorts script, hashtags, Instagram caption, X post, and content ideas for: " + trend
+  );
+}
+</script>
 </body>
 </html>
