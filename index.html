@@ -1,29 +1,464 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>X Content Generator</title>
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>X Content Generator</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      padding: 24px 16px;
+      font-family: Arial, sans-serif;
+      color: #ffffff;
+      background:
+        radial-gradient(circle at top, #1d3557, #05070b 55%);
+    }
+
+    .container {
+      width: 100%;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      width: 58px;
+      height: 58px;
+      margin: 0 auto 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 18px;
+      background: #ffffff;
+      color: #000000;
+      font-size: 30px;
+      font-weight: bold;
+      box-shadow: 0 10px 30px rgba(255, 255, 255, 0.12);
+    }
+
+    h1 {
+      margin-bottom: 10px;
+      text-align: center;
+      font-size: 32px;
+    }
+
+    .subtitle {
+      margin-bottom: 28px;
+      text-align: center;
+      color: #aeb8c8;
+      line-height: 1.6;
+    }
+
+    .card {
+      padding: 22px;
+      border: 1px solid #273143;
+      border-radius: 22px;
+      background: rgba(13, 18, 28, 0.93);
+      box-shadow: 0 18px 55px rgba(0, 0, 0, 0.35);
+    }
+
+    label {
+      display: block;
+      margin-bottom: 9px;
+      font-size: 14px;
+      font-weight: bold;
+      color: #dbe5f5;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #334057;
+      border-radius: 13px;
+      outline: none;
+      color: #ffffff;
+      background: #111827;
+      font-size: 16px;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: #1d9bf0;
+      box-shadow: 0 0 0 3px rgba(29, 155, 240, 0.15);
+    }
+
+    textarea {
+      min-height: 260px;
+      resize: vertical;
+      line-height: 1.6;
+    }
+
+    .field {
+      margin-bottom: 18px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 13px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      transition: 0.2s;
+    }
+
+    button:active {
+      transform: scale(0.98);
+    }
+
+    .generate-button {
+      margin-top: 4px;
+      color: #ffffff;
+      background: #1d9bf0;
+    }
+
+    .generate-button:hover {
+      background: #1688d4;
+    }
+
+    .result-section {
+      display: none;
+      margin-top: 22px;
+    }
+
+    .result-section.show {
+      display: block;
+    }
+
+    .button-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .copy-button {
+      color: #ffffff;
+      background: #263244;
+    }
+
+    .chatgpt-button {
+      color: #000000;
+      background: #ffffff;
+    }
+
+    .status {
+      min-height: 22px;
+      margin-top: 13px;
+      text-align: center;
+      color: #72e6a4;
+      font-size: 14px;
+    }
+
+    .help {
+      margin-top: 22px;
+      padding: 16px;
+      border-radius: 15px;
+      color: #aeb8c8;
+      background: #0d121c;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    footer {
+      margin-top: 24px;
+      text-align: center;
+      color: #778195;
+      font-size: 13px;
+    }
+
+    @media (max-width: 560px) {
+      h1 {
+        font-size: 27px;
+      }
+
+      .grid,
+      .button-row {
+        grid-template-columns: 1fr;
+      }
+
+      .card {
+        padding: 18px;
+      }
+    }
+  </style>
 </head>
+
 <body>
+  <main class="container">
 
-<h1>X Content Generator</h1>
+    <div class="logo">𝕏</div>
 
-<p>Paste your X trending topic:</p>
+    <h1>X Content Generator</h1>
 
-<input type="text" id="trend" placeholder="Enter X trend">
+    <p class="subtitle">
+      Paste an X trending topic and create a powerful prompt
+      for posts, hooks, hashtags and content ideas.
+    </p>
 
-<br><br>
+    <section class="card">
 
-<button onclick="generatePrompt()">Generate Prompt</button>
-<script>
-function generatePrompt() {
-  const trend = document.getElementById("trend").value;
+      <div class="field">
+        <label for="trend">X trending topic</label>
 
-  alert(
-    "Trend: " + trend +
-    "\n\nCopy this into ChatGPT:\n\n" +
-    "Create 10 YouTube titles, a Shorts script, hashtags, Instagram caption, X post, and content ideas for: " + trend
-  );
-}
-</script>
+        <input
+          type="text"
+          id="trend"
+          placeholder="Example: Artificial Intelligence"
+        />
+      </div>
+
+      <div class="grid">
+
+        <div class="field">
+          <label for="language">Content language</label>
+
+          <select id="language">
+            <option value="Tamil">Tamil</option>
+            <option value="English">English</option>
+            <option value="Tamil and English">Tamil + English</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="tone">Content style</label>
+
+          <select id="tone">
+            <option value="viral and engaging">Viral</option>
+            <option value="professional and informative">
+              Professional
+            </option>
+            <option value="funny and entertaining">Funny</option>
+            <option value="motivational and inspiring">
+              Motivational
+            </option>
+            <option value="controversial but respectful">
+              Debate style
+            </option>
+          </select>
+        </div>
+
+      </div>
+
+      <div class="field">
+        <label for="audience">Target audience</label>
+
+        <input
+          type="text"
+          id="audience"
+          placeholder="Example: Tamil social media users"
+        />
+      </div>
+
+      <button
+        class="generate-button"
+        onclick="generatePrompt()"
+      >
+        Generate Content Prompt
+      </button>
+
+      <div class="result-section" id="resultSection">
+
+        <div class="field" style="margin-top: 22px;">
+          <label for="result">Generated prompt</label>
+
+          <textarea
+            id="result"
+            readonly
+          ></textarea>
+        </div>
+
+        <div class="button-row">
+
+          <button
+            class="copy-button"
+            onclick="copyPrompt()"
+          >
+            Copy Prompt
+          </button>
+
+          <button
+            class="chatgpt-button"
+            onclick="openChatGPT()"
+          >
+            Open ChatGPT
+          </button>
+
+        </div>
+
+        <div class="status" id="status"></div>
+
+      </div>
+
+      <div class="help">
+        <strong>How to use:</strong><br />
+        1. Enter an X trending topic.<br />
+        2. Select the language and style.<br />
+        3. Press “Generate Content Prompt”.<br />
+        4. Copy the prompt and paste it into ChatGPT.
+      </div>
+
+    </section>
+
+    <footer>
+      Free X Content Generator
+    </footer>
+
+  </main>
+
+  <script>
+    function generatePrompt() {
+      const trend = document
+        .getElementById("trend")
+        .value
+        .trim();
+
+      const language = document
+        .getElementById("language")
+        .value;
+
+      const tone = document
+        .getElementById("tone")
+        .value;
+
+      const audience =
+        document.getElementById("audience").value.trim()
+        || "general X users";
+
+      const resultSection =
+        document.getElementById("resultSection");
+
+      const result =
+        document.getElementById("result");
+
+      const status =
+        document.getElementById("status");
+
+      if (!trend) {
+        alert("Please enter an X trending topic.");
+        return;
+      }
+
+      const prompt = `
+You are an expert social media content creator.
+
+Create content based on this X trending topic:
+
+TOPIC:
+${trend}
+
+LANGUAGE:
+${language}
+
+TARGET AUDIENCE:
+${audience}
+
+STYLE:
+${tone}
+
+Generate the following:
+
+1. Explain why this topic is trending in simple words.
+
+2. Create 10 engaging X posts.
+   - Each post must be concise.
+   - Use a strong opening hook.
+   - Make the content natural and shareable.
+   - Do not spread unverified information.
+
+3. Create 10 short viral hooks.
+
+4. Create 5 audience-engagement questions.
+
+5. Create 10 relevant hashtags.
+
+6. Create 5 image or video content ideas.
+
+7. Create one X thread with 7 posts.
+   - Number each post.
+   - Make the first post highly attention-grabbing.
+   - End with a call to action.
+
+8. Suggest the best type of post for this topic:
+   - Educational
+   - News
+   - Opinion
+   - Humour
+   - Motivational
+
+Format everything clearly with headings.
+      `.trim();
+
+      result.value = prompt;
+      resultSection.classList.add("show");
+      status.textContent = "Prompt generated successfully!";
+
+      resultSection.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    }
+
+    async function copyPrompt() {
+      const result =
+        document.getElementById("result");
+
+      const status =
+        document.getElementById("status");
+
+      if (!result.value) {
+        alert("Generate a prompt first.");
+        return;
+      }
+
+      try {
+        await navigator.clipboard.writeText(result.value);
+        status.textContent = "Prompt copied successfully!";
+      } catch (error) {
+        result.select();
+        document.execCommand("copy");
+        status.textContent = "Prompt copied successfully!";
+      }
+    }
+
+    function openChatGPT() {
+      const result =
+        document.getElementById("result");
+
+      if (!result.value) {
+        alert("Generate a prompt first.");
+        return;
+      }
+
+      copyPrompt();
+
+      window.open(
+        "https://chatgpt.com/",
+        "_blank"
+      );
+    }
+  </script>
+
 </body>
 </html>
